@@ -3,6 +3,7 @@ from django.db import models
 
 class Station(models.Model):
     name = models.CharField(max_length=64)
+    slug = models.CharField(max_length=64, unique=True)
     description = models.CharField(max_length=256)
     active = models.BooleanField(default=True)
     created_date = models.DateTimeField(auto_now_add=True)
