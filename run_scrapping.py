@@ -1,5 +1,7 @@
 import os, sys
 
+from django.db import DatabaseError
+
 project_path = os.path.dirname(os.path.abspath('manage.py'))
 sys.path.append(project_path)
 os.environ['DJANGO_SETTINGS_MODULE'] = 'top_charts.settings'
@@ -26,7 +28,11 @@ def main():
             chart_data = station[1].main()
             chart = Chart(data = chart_data[0]['chart'],
                           added_date = chart_data[0]['date'],
-                          station_id=Station.objects.filter(slug=station[0]).first())
+                          station=Station.objects.filter(slug=station[0]).first())
+            try:
+                chart.save()
+            except DatabaseError as e:
+                pass
         else:
             pass
 

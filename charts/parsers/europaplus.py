@@ -5,7 +5,7 @@ from .utils import convert_date
 
 europaplus_url = 'https://europaplus.ru/top40'
 
-def main(url=europaplus_url):
+def main(url: object = europaplus_url) -> object:
     tracks = dict()
     errors = []
 

@@ -4,8 +4,24 @@ from .models import Chart, Station
 
 @admin.register(Chart)
 class ChartAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('station','added_date','created_date')
+    list_filter = ('station','added_date','created_date')
+    list_select_related = ('station',)
+    readonly_fields = ('added_date','created_date')
+
+
+class ChartAdminTabularInline(admin.TabularInline):
+    model = Chart
+    ordering = ['-added_date']
+    readonly_fields = ('added_date','created_date')
+
 
 @admin.register(Station)
 class StationAdmin(admin.ModelAdmin):
-    pass
+    inlines = [ChartAdminTabularInline,]
+    list_display = ([field.name for field in Station._meta.get_fields()][1:])
+    list_filter = ('active','created_date')
+    list_editable = ('active',)
+    ordering = ['id']
+    fields = (('name','active'),'description','slug')
+
