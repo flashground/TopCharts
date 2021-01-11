@@ -5,8 +5,7 @@ from .utils import last_friday
 
 loveradio_url = 'http://www.loveradio.ru/biglove_chart.htm'
 
-
-def main(url=loveradio_url):
+def get_chart(url):
     tracks = dict()
     errors = []
     resp = requests.get(url)
@@ -16,6 +15,7 @@ def main(url=loveradio_url):
         page_block = soup.find('table', attrs={'class':"chart__table"})
         if not page_block:
             errors.append({'url': url, 'status_code': 'page block is empty'})
+
         song_list = page_block.find_all('tr', attrs={'class':'chart__table-row'})
         if not song_list:
             errors.append({'url': url, 'status_code': 'song list is empty'})
@@ -34,4 +34,10 @@ def main(url=loveradio_url):
         return tracks, errors
     else:
         errors.append({'url': url, 'status_code': 'page do not response'})
-    return tracks, errors
+        return tracks, errors
+
+
+def main():
+    chart_data = []
+    chart_data.append(get_chart(loveradio_url))
+    return chart_data

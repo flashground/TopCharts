@@ -30,4 +30,15 @@ def last_friday():
     return today - td(days=(int(today.strftime('%w')) + 2))
 
 
-
+def get_old_charts(weeks=1):
+    if isinstance(weeks, int) and weeks<6:
+        week_list = []
+        lf = last_friday()
+        while weeks>=0:
+            if weeks == 0:
+                week_list.append('')
+                break
+            week_list.append(str(lf - td(days=7*weeks)))
+            weeks -= 1
+        return week_list
+    return None

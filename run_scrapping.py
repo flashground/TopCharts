@@ -21,18 +21,22 @@ def check_station(name):
         return True, bool(station.active)
     return False, False
 
+def save_to_database(station, chart_data):
+    chart = Chart(data=chart_data[0]['chart'],
+                  added_date=chart_data[0]['date'],
+                  station=Station.objects.filter(slug=station[0]).first())
+    try:
+        chart.save()
+    except DatabaseError as e:
+        pass
 
 def main():
     for station in STATIONS_LIST:
         if check_station(station[0])[1]:
             chart_data = station[1].main()
-            chart = Chart(data = chart_data[0]['chart'],
-                          added_date = chart_data[0]['date'],
-                          station=Station.objects.filter(slug=station[0]).first())
-            try:
-                chart.save()
-            except DatabaseError as e:
-                pass
+            for chart in chart_data:
+                if chart[0]:
+                    save_to_database(station, chart)
         else:
             pass
 
