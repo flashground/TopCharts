@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 from .utils import convert_date, get_old_charts
 
 
-WEEKS = 5
+WEEKS = 4
 
 europaplus_url = 'https://europaplus.ru/top40'
 

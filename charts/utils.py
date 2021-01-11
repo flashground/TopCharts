@@ -1,6 +1,7 @@
 import os
 from django.utils.deconstruct import deconstructible
 
+
 @deconstructible
 class UploadTo:
     def __init__(self, name):

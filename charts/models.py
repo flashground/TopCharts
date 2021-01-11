@@ -2,9 +2,10 @@ from django.db import models
 from django.utils.safestring import mark_safe
 from .utils import UploadTo
 
+
 class Station(models.Model):
     name = models.CharField(max_length=64)
-    slug = models.CharField(max_length=64, unique=True)
+    slug = models.SlugField(max_length=64, unique=True)
     description = models.CharField(max_length=256, blank=True, null=True)
     active = models.BooleanField(default=True)
     logo_path = models.ImageField(upload_to=UploadTo('logo'), blank=True, null=True)
@@ -31,7 +32,7 @@ class Station(models.Model):
 
 class Chart(models.Model):
     station = models.ForeignKey(Station, on_delete=models.CASCADE)
-    data = models.TextField(null=False, blank=False)
+    data = models.JSONField()
     added_date = models.DateField()
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)

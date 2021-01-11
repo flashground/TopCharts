@@ -8,7 +8,7 @@ class ChartAdmin(admin.ModelAdmin):
     list_filter = ('station','added_date','created_date')
     list_select_related = ('station',)
     readonly_fields = ('added_date','created_date')
-    fields = ('station','data', ('added_date','created_date','updated_date'))
+    # fields = ('station','data', ('added_date','created_date','updated_date'))
 
 
 class ChartAdminTabularInline(admin.TabularInline):

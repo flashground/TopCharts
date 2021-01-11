@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load my_tags %}
+
+{% block content %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for obj in object_list %}
+      <div class="col">
+        <div class="card h-100 border-white">
+            <a href="admin/">
+              <img src="{{ obj.logo_path }}" class="card-img-top" alt="...">
+                <p class="card-text">
+                    {% for track in obj.chart_set.last.data|slice:":5" %}
+                        <p>{{ track.singer }} - {{ track.song }}</p>
+                    {% endfor %}
+                </p>
+              <div class="card-footer">
+
+                <small class="text-muted">
+                    Last updated
+                    {{ obj.chart_set.last.added_date|timesince|upto:',' }} ago
+                </small>
+              </div>
+            </a>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+{% endblock %}
