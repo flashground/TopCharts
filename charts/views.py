@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from django.views.generic import ListView
+from .models import Station
 
-# Create your views here.
+
+class StationView(ListView):
+    model = Station
+    template_name = 'charts/list.html'
