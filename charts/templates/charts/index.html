@@ -1,28 +1,40 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% load my_tags %}
 
 {% block content %}
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for obj in object_list %}
-      <div class="col">
-        <div class="card h-100 border-white">
-            <a href="admin/">
-              <img src="{{ obj.logo_path }}" class="card-img-top" alt="...">
-                <p class="card-text">
-                    {% for track in obj.chart_set.last.data|slice:":5" %}
-                        <p>{{ track.singer }} - {{ track.song }}</p>
-                    {% endfor %}
-                </p>
-              <div class="card-footer">
 
-                <small class="text-muted">
-                    Last updated
-                    {{ obj.chart_set.last.added_date|timesince|upto:',' }} ago
-                </small>
-              </div>
-            </a>
+    <section class="section-tours" id="section-tours">
+        <div class="u-center-text u-margin-bottom-big">
+            <h2 class="heading-secondary">
+                RADIO STATIONS
+            </h2>
         </div>
-      </div>
-    {% endfor %}
-    </div>
+
+        <div class="row">
+            {% for obj in object_list %}
+            <div class="col-1-of-3" onclick="location.href='admin/';">
+               <div class="card">
+                   <div class="card__side card__side--front">
+                        <div class="card__picture" style="background-image: url('{{ obj.logo_path }}')">
+                            &nbsp;
+                        </div>
+                   </div>
+                   <div class="card__side card__side--back card__side--back">
+                        <div class="card__cta">
+                            <div class="card__price-box">
+                                {% for track in obj.chart_set.last.data|slice:":5" %}
+                                <p class="card__price-only">{{ track.singer }} - {{ track.song }}</p>
+                                    {% endfor %}
+                                       <p class="card__price-value">Last updated
+                                                    {{ obj.chart_set.last.added_date|timesince|upto:',' }} ago</p>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
