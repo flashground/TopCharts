@@ -7,6 +7,7 @@ WEEKS = 4
 
 europaplus_url = 'https://europaplus.ru/top40'
 
+
 def get_chart(url):
     tracks = dict()
     errors = []
@@ -45,14 +46,10 @@ def get_chart(url):
     return tracks, errors
 
 
-def main(main_url = europaplus_url, last_weeks=WEEKS):
+def main(last_weeks=WEEKS):
     week_list = get_old_charts(last_weeks)
     chart_data = []
     for week in week_list:
         url = europaplus_url + '?date=' + week
         chart_data.append(get_chart(url))
     return chart_data
-
-
-
-

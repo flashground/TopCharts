@@ -1,12 +1,7 @@
-/*section {*/
-/*  background: #f4f4f4;*/
-/*  padding: 10px 0;*/
-/*}*/
-
 .container-chart {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
 .carousel {
@@ -137,7 +132,12 @@
 }
 .carousel__thumbnails label:before {
   display: block;
-  content: "";
+  /*content: "";*/
   width: 100%;
-  padding-top: 100%;
+  padding-top: 50%;
 }
+
+.card__date {
+  font-size: 1.3rem;
+  font-weight: 100;
+  text-align: center;}

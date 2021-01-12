@@ -1,10 +1,13 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv()
 
-SECRET_KEY = 'tr1n@fhb%ty9$+n5&f$76wm73x8p^)*ajes$t==f*&(y-v(6=z'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True
 
@@ -92,7 +95,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-INTERNAL_IPS = ['127.0.0.1',]
+INTERNAL_IPS = ['127.0.0.1', ]
 
 STATIC_URL = '/static/'
 

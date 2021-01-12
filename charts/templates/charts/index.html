@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% load my_tags %}
 
 {% block content %}
-
-    <section class="section-tours" id="section-tours">
+    <section class="section-stations">
         <div class="u-center-text u-margin-bottom-big">
             <h2 class="heading-secondary">RADIO STATIONS</h2>
         </div>
-
         <div class="row">
             {% for obj in object_list %}
             <div class="col-1-of-3" onclick="location.href='chart/{{ obj.id }}';">
@@ -21,12 +18,12 @@
                    </div>
                    <div class="card__side card__side--back card__side--back">
                         <div class="card__cta">
-                            <div class="card__price-box">
+                            <div class="card__track-box">
                                 {% for track in obj.chart_set.last.data|slice:":5" %}
-                                <p class="card__price-only">{{ track.singer }} - {{ track.song }}</p>
+                                <p class="card__track-only">{{ track.position }}. {{ track.singer }} - {{ track.song }}</p>
                                     {% endfor %}
-                                       <p class="card__price-value">Last updated
-                                                    {{ obj.chart_set.last.added_date|timesince|upto:',' }} ago</p>
+                                       <p class="card__date-value">Last updated
+                                           {{ obj.chart_set.last.added_date|timesince|upto:',' }} ago</p>
                             </div>
                         </div>
                     </div>

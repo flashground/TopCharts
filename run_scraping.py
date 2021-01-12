@@ -1,4 +1,5 @@
-import os, sys
+import os
+import sys
 
 from django.db import DatabaseError
 
@@ -15,11 +16,13 @@ from charts.models import Station, Chart
 STATIONS_LIST = (('europaplus', europaplus),
                  ('loveradio', loveradio))
 
+
 def check_station(name):
     station = Station.objects.filter(slug=name).first()
     if station:
         return True, bool(station.active)
     return False, False
+
 
 def save_to_database(station, chart_data):
     chart = Chart(data=chart_data[0]['chart'],
@@ -27,8 +30,9 @@ def save_to_database(station, chart_data):
                   station=Station.objects.filter(slug=station[0]).first())
     try:
         chart.save()
-    except DatabaseError as e:
+    except DatabaseError:
         pass
+
 
 def main():
     for station in STATIONS_LIST:

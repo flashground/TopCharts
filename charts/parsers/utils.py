@@ -35,10 +35,10 @@ def last_friday():
 
 
 def get_old_charts(weeks=1):
-    if isinstance(weeks, int) and weeks<5:
+    if isinstance(weeks, int) and weeks < 5:
         week_list = []
         lf = last_friday()
-        while weeks>=0:
+        while weeks >= 0:
             if weeks == 0:
                 week_list.append('')
                 break
@@ -46,5 +46,3 @@ def get_old_charts(weeks=1):
             weeks -= 1
         return week_list
     return None
-
-convert_date('24 ноября')

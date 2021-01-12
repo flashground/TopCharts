@@ -15,7 +15,7 @@
                 <figure>
                     <div class="chart">
                         {% for track in obj.data|slice:":10" %}
-                            <p class="card__price-only">{{ track.position }}. {{ track.singer }} - {{ track.song }}</p>
+                            <p class="card__track-only">{{ track.position }}. {{ track.singer }} - {{ track.song }}</p>
                         {% endfor %}
                     </div>
                 </figure>
@@ -25,7 +25,7 @@
         <ul class="carousel__thumbnails">
             {% for obj in object %}
             <li>
-                <label for="slide-{{ forloop.counter }}">{{ obj.added_date }}</label>
+                <label for="slide-{{ forloop.counter }}" class="card__date">{{ obj.added_date }}</label>
             </li>
             {% endfor %}
         </ul>

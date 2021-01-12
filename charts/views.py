@@ -15,7 +15,7 @@ class StationView(ListView):
 
 def station_detail(request, pk):
     object_ = Chart.objects.filter(station_id=pk)
-    return render(request, 'charts/chart.html', {'object':object_})
+    return render(request, 'charts/chart.html', {'object': object_})
 
 
 class StationViewSet(viewsets.ModelViewSet):

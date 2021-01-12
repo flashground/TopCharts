@@ -12,12 +12,12 @@ router.register(r'charts', ChartViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', StationView.as_view(), name = 'stations'),
-    path('chart/<int:pk>/', station_detail, name = 'charts'),
+    path('', StationView.as_view(), name='stations'),
+    path('chart/<int:pk>/', station_detail, name='charts'),
     path('api/', include(router.urls)),
     # path('restapi/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns += [path('__debug__/', include(debug_toolbar.urls)),]
+    urlpatterns += [path('__debug__/', include(debug_toolbar.urls)), ]
