@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from .models import Station, Chart
-import json
 
 
 class StationView(ListView):
@@ -9,16 +8,7 @@ class StationView(ListView):
     model = Station
     template_name = 'charts/index.html'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     chart = Chart.objects.all().first()
-    #     json_text = chart.data[:5]
-    #     chart_list = []
-    #     for json in json_text:
-    #         chart_list.append(f"{json['singer']} - {json['song']}")
-    #     context['date'] = chart.added_date
-    #     context['chart'] = chart_list
-    #     a=5
 
-        # return context
-    
+def station_detail(request, pk):
+    object_ = Chart.objects.filter(station_id=pk)
+    return render(request, 'charts/chart.html', {'object':object_})

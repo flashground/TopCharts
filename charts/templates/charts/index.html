@@ -7,14 +7,12 @@
 
     <section class="section-tours" id="section-tours">
         <div class="u-center-text u-margin-bottom-big">
-            <h2 class="heading-secondary">
-                RADIO STATIONS
-            </h2>
+            <h2 class="heading-secondary">RADIO STATIONS</h2>
         </div>
 
         <div class="row">
             {% for obj in object_list %}
-            <div class="col-1-of-3" onclick="location.href='admin/';">
+            <div class="col-1-of-3" onclick="location.href='chart/{{ obj.id }}';">
                <div class="card">
                    <div class="card__side card__side--front">
                         <div class="card__picture" style="background-image: url('{{ obj.logo_path }}')">

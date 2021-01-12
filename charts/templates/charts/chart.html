@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="home">
+  <a href="/">ГЛАВНАЯ</a>
+</div>
+<div class="container-chart">
+    <div class="carousel">
+    {% for obj in object %}
+        <input type="radio" name="slides" checked="checked" id="slide-{{ forloop.counter }}">
+    {% endfor %}
+        <ul class="carousel__slides">
+            {% for obj in object %}
+            <li class="carousel__slide">
+                <figure>
+                    <div class="chart">
+                        {% for track in obj.data|slice:":10" %}
+                            <p class="card__price-only">{{ track.position }}. {{ track.singer }} - {{ track.song }}</p>
+                        {% endfor %}
+                    </div>
+                </figure>
+            </li>
+            {% endfor %}
+        </ul>
+        <ul class="carousel__thumbnails">
+            {% for obj in object %}
+            <li>
+                <label for="slide-{{ forloop.counter }}">{{ obj.added_date }}</label>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
