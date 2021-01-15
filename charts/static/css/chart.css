@@ -137,7 +137,17 @@
   padding-top: 50%;
 }
 
+#ul {
+  display: block;
+  list-style-type: disc;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 5px;
+}
 .card__date {
   font-size: 1.3rem;
   font-weight: 100;
-  text-align: center;}
+  text-align: center;
+}

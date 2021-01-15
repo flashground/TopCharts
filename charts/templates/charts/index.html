@@ -1,35 +1,37 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load my_tags %}
-
+{% block title %}TOP CHARTS{% endblock %}
 {% block content %}
-    <section class="section-stations">
-        <div class="u-center-text u-margin-bottom-big">
-            <h2 class="heading-secondary">RADIO STATIONS</h2>
-        </div>
-        <div class="row">
-            {% for obj in object_list %}
-            <div class="col-1-of-3" onclick="location.href='chart/{{ obj.id }}';">
-               <div class="card">
-                   <div class="card__side card__side--front">
-                        <div class="card__picture" style="background-image: url('{{ obj.logo_path }}')">
-                            &nbsp;
-                        </div>
-                   </div>
-                   <div class="card__side card__side--back card__side--back">
-                        <div class="card__cta">
-                            <div class="card__track-box">
-                                {% for track in obj.chart_set.last.data|slice:":5" %}
-                                <p class="card__track-only">{{ track.position }}. {{ track.singer }} - {{ track.song }}</p>
-                                    {% endfor %}
-                                       <p class="card__date-value">Last updated
-                                           {{ obj.chart_set.last.added_date|timesince|upto:',' }} ago</p>
-                            </div>
-                        </div>
-                    </div>
-               </div>
+<div class="container" style="margin-top:10%;">
+  <div class="row">
+      {% for obj in object_list %}
+      <!-- Card -->
+        <div class="col-10 col-sm-8 col-md-6 col-lg-5 col-xl-4 card-container mx-auto" onclick="location.href='chart/{{ obj.id }}';">
+          <div class="card-flip h-150">
+            <!-- Card Front -->
+            <div class="card front card-inverse shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="d-flex align-items-center" style="height:100%;">
+              <img class="card-img-top img-fluid " style="height:auto;" src="{{ obj.logo_path }}" alt="Station image">
+                </div>
             </div>
-            {% endfor %}
+            <!-- End Card Front -->
+
+            <!-- Card Back -->
+            <div class="card back shadow-lg p-3 mb-5 bg-white rounded">
+              <div class="card-block mx-auto">
+                <h3 class="card-title text-center">{{ obj.name }}</h3>
+                  {% for track in obj.chart_set.last.data|slice:":5" %}
+                    <p class="card-text">{{ track.position }}. {{ track.singer }} - {{ track.song }}</p>
+                  {% endfor %}
+                <p class="text-muted position-absolute end-0">Last updated {{ obj.chart_set.last.added_date|timesince|upto:',' }} ago</p>
+              </div>
+            </div>
+            <!-- End Card Back -->
+          </div>
         </div>
-    </section>
+        <!-- End Card -->
+      {% endfor %}
+  </div>
+</div>
 {% endblock %}

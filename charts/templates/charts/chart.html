@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-
+{% block title %}CHART{% endblock %}
 {% block content %}
-<div class="home">
+<div class="container">
   <a href="/">ГЛАВНАЯ</a>
 </div>
 <div class="container-chart">
@@ -13,7 +13,7 @@
             {% for obj in object %}
             <li class="carousel__slide">
                 <figure>
-                    <div class="chart">
+                    <div class="tracks">
                         {% for track in obj.data|slice:":10" %}
                             <p class="card__track-only">{{ track.position }}. {{ track.singer }} - {{ track.song }}</p>
                         {% endfor %}
