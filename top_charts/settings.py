@@ -1,17 +1,20 @@
 from pathlib import Path
 import os
-from dotenv import load_dotenv
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv('.env.local') if os.path.exists('.env.local') else load_dotenv('.env.dev')
+except ModuleNotFoundError:
+    pass
 
 
-load_dotenv()
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = int(os.environ.get("DEBUG", default=0))
 
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 INSTALLED_APPS = [
@@ -60,8 +63,12 @@ WSGI_APPLICATION = 'top_charts.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
+        "USER": os.environ.get("SQL_USER", "user"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
 
