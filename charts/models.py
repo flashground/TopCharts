@@ -31,9 +31,9 @@ class Station(models.Model):
 
 
 class Chart(models.Model):
-    station = models.ForeignKey(Station, on_delete=models.CASCADE)
-    data = models.JSONField()
-    added_date = models.DateField()
+    station = models.ForeignKey(Station, on_delete=models.CASCADE, blank=True, null=True)
+    data = models.JSONField(blank=True, null=True)
+    added_date = models.DateField(blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
